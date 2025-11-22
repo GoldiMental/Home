@@ -1,0 +1,112 @@
+body {
+    background: radial-gradient(rgb(15, 20, 40), rgb(55, 55, 80));
+    background-size: 200vw 200vh;
+    color: rgb(180, 180, 180);
+}
+
+header {
+    justify-self: center;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header > img {
+    display: block;
+    height: 30%;
+    max-height: 108px;
+    width: 30%;
+    max-width: 207px;
+}
+
+/* NAVIGATION BEREICH */
+#navbar {
+    padding: 1vh;
+    border-bottom: 1px solid rgb(210, 170, 100);
+    display: flex;
+    justify-content: center;
+}
+
+#main-nav {
+    display: flex;
+    flex-wrap: nowrap; 
+    align-items: center;
+    position: relative; 
+    max-width: 1200px; 
+    width: 100%;
+    padding: 0 10px;
+}
+
+/* BUTTONS */
+.nav-link {
+    flex-shrink: 0; 
+    padding: 8px 12px;
+    cursor: pointer;
+    border: none;
+    background: none;
+    color: rgb(210, 170, 100);
+    text-decoration: none;
+    transition: all 0.13s ease;
+}
+
+.nav-link:hover {
+    transform: scale(1.1);
+    text-decoration: underline;
+}
+
+/* "MEHR"-BUTTON UND CONTAINER */
+#more-container {
+    position: relative; 
+    flex-shrink: 0;
+    z-index: 2;
+}
+
+#more-button {
+    color: rgb(210, 170, 100);
+    background: none;
+    border: none;
+}
+
+#more-dropdown {
+    position: absolute; 
+    top: 100%;
+    right: 0;
+    background: rgb(35, 35, 60); 
+    border: 1px solid rgb(210, 170, 100);
+    min-width: 200px;
+    padding: 5px;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+}
+
+/* CONTENT-BEREICH */
+section {
+    position: absolute;
+    margin-top: 1vh;
+    left: 0;
+    right: 0;
+    padding: 0 5vw;
+}
+
+.hidethis {
+    display: none !important;
+}
+
+/* FOOTER */
+footer {
+    position: fixed;
+    font-size: smaller;
+    justify-self: center;
+    text-align: center;
+    width: 100vw;
+    bottom: 0;
+    background: linear-gradient(90deg, rgb(55, 55, 90), rgb(15, 20, 35));
+    border-top: 1px solid rgb(210, 170, 100);
+    color: rgb(210, 170, 100);
+}
+
+footer > p {
+    margin: 1vh;
+}
