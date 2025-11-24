@@ -5,6 +5,19 @@ const PORT = 3000;
 app.use(express.json());
 app.use(express.static('public'));
 
+app.set('view engine', 'ejs');
+app.set('views', './views');
+
+app.get('/api/views/:ContentID', (req, res) => {
+    const viewName = req.params.ContentID;
+    res.render(viewName, {}, (err, html) => {
+        if (err){
+            return res.status(500).send('RenderERROR: api/views/:')
+        }
+        res.send(html);
+    })
+});
+
 app.post('/api/test', (req, res) => {
     const input = req.body;
     if (!input) {

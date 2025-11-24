@@ -1,40 +1,6 @@
 //
-//TestListener --- Button is in <section id="Development"> in index.html
-const testButton = document.getElementById('test-button');
-const testStatus = document.getElementById('test-status');
-testButton.addEventListener('click', async () => {
-    console.log('Test gestartet...');
-    testStatus.innerText = 'Test wird ausgeführt...';
-    const testInput = {info:'Erster API Aufruf'};
-    const API = 'http://localhost:3000/api/test';
-    try {
-        const response = await fetch(API, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(testInput)
-        });
-        if (response.ok) {
-            const result = await response.json();
-            console.log('Erfolg:', result.message);
-            console.log('Übermittelte Daten:', result.data);
-            testStatus.innerText = `Test erfolgreich: ${result.data.info}`;
-            testStatus.style.color = 'rgb(20,150,30)';
-        } else {
-            const errorData = await response.json();
-            console.error(`Fehler ${response.status}: ${errorData.message}`);
-            testStatus.innerText = `Test fehlgeschlagen: Fehler ${response.status}: ${errorData.message}`;
-            testStatus.style.color = 'rgb(150,30,50)';
-        }
-    } catch (error) {
-        console.error('Fehler beim Senden', error.message);
-        testStatus.innerText = `Test konnte nicht ausgeführt werden! Fehler: ${error.message}`;
-        testStatus.style.color = 'rgb(150,30,50)';
-    }
-});
-//TestListener-End
 
+const ContentView = document.getElementById('Content');
 const mainNav = document.getElementById('main-nav');
 const moreDropdown = document.getElementById('more-dropdown');
 const moreButton = document.getElementById('more-button');
@@ -68,32 +34,16 @@ function checkOverflow() {
 }
 
 //Content-Switch-Function
-function SwitchTo(ContentID) {
-    const sections = document.getElementsByTagName('section');
-    const errInfo = 'Klicke auf "Startseite" o.ä.';
-    let switched = false;
-    for (const section of sections) {
-        if (section.nodeType === 1) {
-            if (section.id === ContentID) {
-                section.classList.remove('hidethis');
-                console.log('SwitchedTo:', section.id);
-                switched = true;
-            } else { section.classList.add('hidethis'); }
-        }
+async function SwitchTo(ContentID) {
+    const API = `http://localhost:3000/api/views/${ContentID}`;
+    const response = await fetch(API);
+    if (!response.ok) {
+        console.error('Failed to fetch in SwitchTo() with ContentID:',ContentID);
     }
-    if (!switched) {
-        console.log(`Cannot SwitchTo(${ContentID}): no section with this ID! Prove section.id in index.html`);
-        alert(`Unerwarteter Fehler.\nMach Dir keine Sorgen, wir sind GoldiMental Entertainment.\nEinfach folgendes tun: ${errInfo}`);
-    }
+    const Content = await response.text();
+    ContentView.innerHTML = Content;
 }
 //Listeners
-mainNav.addEventListener('click', (event) => {
-    const navElement = event.target.closest('.nav-link');
-    if (navElement) {
-        const ContentID = navElement.dataset.ziel;
-        if (ContentID) { SwitchTo(ContentID); }
-    }
-});
 moreButton.addEventListener('click', (e) => {
     e.stopPropagation();
     moreDropdown.classList.toggle('hidethis');
