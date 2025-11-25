@@ -20,6 +20,8 @@ app.get('/api/views/:ContentID', (req, res) => {
     })
 });
 
+
+//Test-API
 app.post('/api/test', (req, res) => {
     const input = req.body;
     if (!input) {

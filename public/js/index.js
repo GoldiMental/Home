@@ -1,5 +1,5 @@
 //
-
+let currentView;
 const ContentView = document.getElementById('Content');
 const mainNav = document.getElementById('main-nav');
 const moreDropdown = document.getElementById('more-dropdown');
@@ -31,16 +31,26 @@ function checkOverflow() {
 
 //Content-Switch-Function
 async function SwitchTo(ContentID) {
-    const API = `http://localhost:3000/api/views/${ContentID}`;
-    const response = await fetch(API);
-    if (!response.ok) {
-        console.error('Failed to fetch in SwitchTo() with ContentID:', ContentID);
+    if (currentView != ContentID) {
+        const API = `http://localhost:3000/api/views/${ContentID}`;
+        const response = await fetch(API);
+        if (!response.ok) {
+            console.error('Failed to fetch in SwitchTo() with ContentID:', ContentID);
+        }
+        const Content = await response.text();
+        const LoadedScripts = document.getElementsByTagName('script');
+        let scriptExists = false;
+        for (i = 0; i < LoadedScripts.length; i++) {
+            if (LoadedScripts[i].src.split('/js/')[1] === `${ContentID}.js`) { scriptExists = true; }
+        }
+        if (!scriptExists) {
+            const newScript = document.createElement('script');
+            newScript.src = `/js/${ContentID}.js`;
+            document.body.appendChild(newScript);
+        }
+        ContentView.innerHTML = Content;
+        currentView = ContentID;
     }
-    const Content = await response.text();
-    const script = document.createElement('script');
-    script.src = `/js/${ContentID}.js`;
-    document.body.appendChild(script);
-    ContentView.innerHTML = Content;
 }
 //Listeners
 moreButton.addEventListener('click', (e) => {
@@ -66,3 +76,4 @@ window.addEventListener('resize', () => {
 
 //Onload
 checkOverflow();
+SwitchTo('Start');

@@ -85,10 +85,12 @@ header > img {
 /* CONTENT-BEREICH */
 section {
     position: absolute;
-    margin-top: 1vh;
-    left: 0;
-    right: 0;
-    padding: 0 5vw;
+    left: 1vh;
+    right: 1vh;
+    margin: 1vh;
+    padding: 0 5vw 11vh 5vw;
+    border-left: 1px solid rgb(210,170,100);
+    border-right: 1px solid rgb(210,170,100);
 }
 
 .hidethis {
