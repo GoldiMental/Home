@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const IP = 'localhost';
 const PORT = 3000;
 
 app.use(express.json());
@@ -8,6 +9,7 @@ app.use(express.static('public'));
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
+//API Content-Switch index.html
 app.get('/api/views/:ContentID', (req, res) => {
     const viewName = req.params.ContentID;
     res.render(viewName, {}, (err, html) => {
@@ -27,17 +29,18 @@ app.post('/api/test', (req, res) => {
         });
     }
     console.log('Daten empfangen:', input);
+    const output = {info:'Erster API-POST Aufruf erfolgreich!'};
     res.status(201).json({
         status: 'success',
         message: 'Daten übermittelt.',
-        data: input,
-    })
+        data: output,
+    });
 });
 
 app.get('/', (req, res) => {
-    res.send(`✓ Server is running... Watch this Site http://localhost:${PORT}`);
+    res.send(`✓ Server is running... Watch this Site http://${IP}:${PORT}`);
 });
 
 app.listen(PORT, () => {
-    console.log(`✓ Server is running on http://localhost:${PORT}`);
+    console.log(`✓ Server is running on http://${IP}:${PORT}`);
 });

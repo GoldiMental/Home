@@ -6,7 +6,7 @@ const moreDropdown = document.getElementById('more-dropdown');
 const moreButton = document.getElementById('more-button');
 const moreContainer = document.getElementById('more-container');
 
-//Navbar-Functions
+//Navbar-Observer-Functions
 function moveBackToMain() {
     while (moreDropdown.children.length > 0) {
         const item = moreDropdown.firstElementChild;
@@ -24,13 +24,9 @@ function checkOverflow() {
             const item = navItems[i];
             if (mainNav.scrollWidth > mainNav.clientWidth) {
                 moreDropdown.prepend(item);
-            } else {
-                break;
-            }
+            } else { break; }
         }
-    } else {
-        moreContainer.style.display = 'none';
-    }
+    } else { moreContainer.style.display = 'none'; }
 }
 
 //Content-Switch-Function
@@ -38,9 +34,12 @@ async function SwitchTo(ContentID) {
     const API = `http://localhost:3000/api/views/${ContentID}`;
     const response = await fetch(API);
     if (!response.ok) {
-        console.error('Failed to fetch in SwitchTo() with ContentID:',ContentID);
+        console.error('Failed to fetch in SwitchTo() with ContentID:', ContentID);
     }
     const Content = await response.text();
+    const script = document.createElement('script');
+    script.src = `/js/${ContentID}.js`;
+    document.body.appendChild(script);
     ContentView.innerHTML = Content;
 }
 //Listeners
