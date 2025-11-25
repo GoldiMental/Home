@@ -20,6 +20,15 @@ header > img {
     max-width: 207px;
 }
 
+a {
+    color: rgb(210,170,100);
+    transition: all 0.2s ease;
+}
+
+a:hover {
+    color: rgb(210,210,100);
+}
+
 /* NAVIGATION BEREICH */
 #navbar {
     padding: 1vh;
@@ -47,11 +56,12 @@ header > img {
     background: none;
     color: rgb(210, 170, 100);
     text-decoration: none;
-    transition: all 0.13s ease;
+    transition: all 0.2s ease;
 }
 
 .nav-link:hover {
     transform: scale(1.1);
+    color: rgb(210,210,100);
     text-decoration: underline;
 }
 

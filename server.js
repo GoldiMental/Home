@@ -13,7 +13,7 @@ app.set('views', './views');
 app.get('/api/views/:ContentID', (req, res) => {
     const viewName = req.params.ContentID;
     res.render(viewName, {}, (err, html) => {
-        if (err){
+        if (err) {
             return res.status(500).send('RenderERROR: api/views/:')
         }
         res.send(html);
@@ -24,17 +24,30 @@ app.get('/api/views/:ContentID', (req, res) => {
 //Test-API
 app.post('/api/test', (req, res) => {
     const input = req.body;
-    if (!input) {
+    if (!input || Object.keys(input).length === 0) {
         return res.status(400).json({
             status: 'error',
-            message: 'Fehlende Daten im req.body'
+            message: 'Fehlende Daten im Request-Body!'
         });
     }
-    console.log('Daten empfangen:', input);
-    const output = {info:'Erster API-POST Aufruf erfolgreich!'};
+    const { message, id } = input;
+    if (!message || typeof message !== 'string' || message.length < 5) {
+        return res.status(400).json({
+            status: 'error',
+            message: 'ValidationError: "message" nicht gegeben oder kürzer als 5 Zeichen!',
+        });
+    }
+    if (!id || typeof id !== 'number' || !Number.isInteger(id)){
+        return res.status(400).json({
+            status: 'error',
+            message: 'ValidationError: "id" nicht gegeben oder NaN!',
+        });
+    }
+    console.log('Daten empfangen und validiert:', input);
+    const output = { info: 'Erster API-POST Aufruf erfolgreich!', messageLength: message.length};
     res.status(201).json({
         status: 'success',
-        message: 'Daten übermittelt.',
+        message: 'Daten übermittelt und validiert!',
         data: output,
     });
 });
