@@ -5,7 +5,7 @@ echo "---Erstelle Commit für Github---"
 current_version=$(cat "$VERSION_FILE")
 git add *
 sleep 1
-git commit -m "Update Version 2.${current_version}"
+git commit -m "Update Version 2.${current_version} from Goldigste"
 if [ $? -ne 0 ]; then
   echo "Failed: git commit"
   exit 1
