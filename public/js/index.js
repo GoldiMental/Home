@@ -33,7 +33,7 @@ function checkOverflow() {
 //Content-Switch-Function
 async function SwitchTo(ContentID) {
     if (currentView != ContentID) {
-        const API = `http://www.goldimental.de/api/views/${ContentID}`;
+        const API = `https://www.goldimental.de/api/views/${ContentID}`;
         try {
             const response = await fetch(API);
             if (!response.ok) {

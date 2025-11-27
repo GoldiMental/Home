@@ -6,7 +6,7 @@ window.handleTestClick = async function (buttonElement) {
     const testStatus = document.getElementById('test-status');
     testStatus.innerText = 'API-Test gestartet...';
     testStatus.style.color = 'rgb(210,170,100)';
-    const API = 'http://www.goldimental.de/api/test';
+    const API = 'https://www.goldimental.de/api/test';
     const testData = { message: 'Erste API-POST Anfrage von Development.ejs!',id: 42 };
     try {
         const response = await fetch(API, {
