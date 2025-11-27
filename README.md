@@ -1,2 +1,2 @@
 # Home
-Homepage for GoldiMental.de
+Homepage for www.goldimental.de
