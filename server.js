@@ -5,7 +5,7 @@ const IP = 'localhost';
 const PORT = 3000;
 
 const corsOpt = {
-    origin: 'https://www.goldimental.de',
+    origin: ['https://www.goldimental.de', 'https://goldimental.de', 'http://localhost:3000'],
     optionsSuccessStatus: 200
 }
 app.use(cors(corsOpt));
@@ -44,14 +44,14 @@ app.post('/api/test', (req, res) => {
             message: 'ValidationError: "message" nicht gegeben oder kürzer als 5 Zeichen!',
         });
     }
-    if (!id || typeof id !== 'number' || !Number.isInteger(id)){
+    if (!id || typeof id !== 'number' || !Number.isInteger(id)) {
         return res.status(400).json({
             status: 'error',
             message: 'ValidationError: "id" nicht gegeben oder NaN!',
         });
     }
     console.log('Daten empfangen und validiert:', input);
-    const output = { info: 'Erster API-POST Aufruf erfolgreich!', messageLength: message.length};
+    const output = { info: 'Erster API-POST Aufruf erfolgreich!', messageLength: message.length };
     res.status(201).json({
         status: 'success',
         message: 'Daten übermittelt und validiert!',
