@@ -27,7 +27,7 @@ sleep 1
 echo "---Verbinde mit Server---"
 ssh goldimental@87.106.45.77 <<EOF
     echo "---Mit Server verbunden---"
-    cd /Home || {echo "Failed: cd /Home"; exit 1;}
+    cd Home || {echo "Failed: cd Home"; exit 1;}
     sleep 1
     echo "---Führe git pull aus---"
     git pull
