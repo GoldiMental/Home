@@ -1,7 +1,14 @@
 const express = require('express');
+const cors = require('cors');
 const app = express();
 const IP = 'localhost';
 const PORT = 3000;
+
+const corsOpt = {
+    origin: 'https://www.goldimental.de',
+    optionsSuccessStatus: 200
+}
+app.use(cors(corsOpt));
 
 app.use(express.json());
 app.use(express.static('public'));
