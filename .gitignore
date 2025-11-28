@@ -12,7 +12,6 @@
 *.env
 version.txt
 update.sh
-
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
